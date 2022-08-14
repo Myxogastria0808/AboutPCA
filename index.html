@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="./R.ico">
+    <meta name="theme-color" content="#006400">
+    <!-- highlight.js: cdnjs で利用する場合 -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/default.min.css">
+   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js"></script>
+   <script>hljs.highlightAll();</script>
+    <title>PCA</title>
+</head>
+<body>
+   <div class="width">
+      <div class="background-img">
+         Principal Component Analysis
+      </div>
+      <div class="width-content">
+         <h2>Whai is my creation</h2>
+         <p>
+            I developed a framework of pca3D (R programming language). 
+            One of the most wonderful factors of it is the function to compress multidimensional vectors into three dimensions easily. 
+            This function helps you draw N types of data (N≧4) and want to plot these data into a graph. 
+            If you don't know it, you have no choice but to draw those data using nC2 patterns of graphs. 
+            The core of the function is "PCA" (Principal Component Analysis). PCA is one of the solution methods for data analysis. 
+            PCA is very useful solution methods. However, the formula is very complex. So, it is very hard for ordinary people to use PCA. 
+            The framework which I developed solve this problem, because how to use it is very simple! Let's try my creation!
+         </p>
+         <h2>How to use</h2>
+         <h3>First step</h3>
+         <p class="p-section">Data with multiple items in a single data set is created with Excel or other software and exported to a CSV file.</p>
+         <div class="a-div">
+            <a href="https://drive.google.com/file/d/1TaElmEwW5k0KffjoreNjVYv4i_q45YMo/view?usp=sharing" target="_blank"  rel="noopener noreferrer">An example of csv creation</a>
+         </div>
+         <p class="p-section">This data will generate an error warning message when loaded, but this is not a problem for plotting the graph, so please ignore it.</p>
+         <h3>Second step</h3>
+         <p class="p-section">Install R, RStudio, pandoc following links.</p>
+         <div class="a-div">
+            <a href="https://www.r-project.org/" target="_blank"  rel="noopener noreferrer">R download link</a>
+            <br>
+            <a href="https://www.rstudio.com/products/rstudio/download/" target="_blank"  rel="noopener noreferrer">RStudio download link</a>
+            <br>
+            <a href="https://pandoc.org/installing.html" target="_blank"  rel="noopener noreferrer">pandoc download link</a>
+         </div>
+         <h3>Third step</h3>
+         <p class="p-section">Copy the following R commands and paste them into the RStudio terminal.</p>
+         <pre>
+            <code class="R">
+               #Copy under the commands
+               install.packages("knitr")
+               install.packages("rmarkdown")
+               install.packages("rgl")
+               install.packages("pca3d")
+               install.packages("devtools")
+               devtools::install_github("vqv/ggbiplot")
+            </code>
+         </pre>
+         <h3>Last step</h3>
+         <p class="p-section">
+            Edit the following commands to fit your data and environment, then copy and paste them into the RStudio terminal.
+            I made two types of PCA. Choose your favorite graph design.
+         </p>
+         <h4>type 1</h4>
+         <pre>
+            <code class="R">
+               #This is sample code
+               #Edit and copy under the commands
+               library(&quot;ggbiplot&quot;)
+
+               #Loading Data
+               A=read.csv(&quot;G:/sample.csv&quot;)
+               A=data.frame(&quot;A&quot;=A)
+               A&lt;-A[2:7]
+
+               #Assigning Group Information
+               A[1:914,] &lt;- A[1:914,] + 1
+               A[915:1123,] &lt;- A[915:1123,] + 2
+               A[1124:1244,] &lt;- A[1124:1244,] + 3
+               A[1245:1299,] &lt;- A[1245:1299,] + 4
+               A&lt;- cbind(c(rep(&quot;V violacea Makino&quot;, 914),
+               rep(&quot;V violacea var.makinoi harima&quot;,209),
+               rep(&quot;V violacea var.makinoi&quot;, 121),
+               rep(&quot;V sieboldii&quot;, 55)),
+               A)
+               colnames(A) &lt;- c(&quot;types&quot;,&quot;L1&quot;,&quot;L2&quot;,&quot;L3&quot;,&quot;L4&quot;,&quot;L1/L2&quot;,&quot;L1/L4&quot; )
+ 
+               #PCA
+               W &lt;- prcomp(A[, 2:7], scale = FALSE)
+ 
+               #Specify prcomp() or princomp() results: pcobj option
+               #Specify principal components to plot: choices option
+               #Specify group information: groups option
+               #Describe probability ellipses for each group: ellipse option
+               #Draw correlated circles: circle option
+               #The ggplot2 command is available
+               ggbiplot(pcobj = W, choices = 1:2, obs.scale = 0.5, var.scale = 2,
+               groups = A[, 1], ellipse = TRUE, ) +
+               scale_colour_manual(values = c(&quot;#FF0000&quot;, &quot;black&quot;, &quot;#00FF00&quot;,&quot;blue&quot;)) +
+               theme(legend.direction = &quot;horizontal&quot;, legend.position = &quot;top&quot;)
+  
+            </code>
+         </pre>
+         <h4>Result</h4>
+         <div class="img_div">
+            <img id="Outline_img" src="./PCA_type1.png">
+         </div>
+
+         <h4>type 2 (This code will produce both 2D and 3D graphs.)</h4>
+         <pre>
+            <code class="R">
+               #This is sample code
+               #Edit and copy under the commands
+               library(rgl)
+               library(pca3d)
+               
+               #Loading Data
+               A=read.csv(&quot;G:/sample.csv&quot;)
+               A=data.frame(&quot;A&quot;=A)
+               compiled_A&lt;-A[2:7]
+               pca &lt;-prcomp(compiled_A,scale=TRUE)
+               
+               #Labeling: group option
+               #Drawing planes: show.plane options
+               #Drawing ellipses: show.ellipses options
+               pca2d(pca,
+               group = A[,1],
+               show.ellipses=TRUE,
+               ellipse.ci=0.9,
+               show.plane=TRUE,
+               fancy= TRUE)
+               
+               #Labeling: group option
+               #Drawing planes: show.plane options
+               #Drawing ellipses: show.ellipses options
+               pca3d(pca,
+               group = A[,1],
+               show.ellipses=TRUE,
+               ellipse.ci=0.9,
+               show.plane=TRUE,
+               fancy= FALSE)
+            </code>
+         </pre>
+         <div class="a-div">
+            <a href="https://drive.google.com/file/d/1cDx0rbiqLK0cL0qwxn0est30Q1TFW8v9/view?usp=sharing" target="_blank"  rel="noopener noreferrer">Details of PCA 3D (Citation: Mx. January Weiner)</a>
+         </div>
+         <h4>Result (type 2, 2D graph)</h4>
+         <div class="img_div">
+            <img id="Outline_img" src="./PCA_type2_2D.png">
+         </div>
+         <h4>Result (type 2, 3D graph)</h4>
+         <div class="img_div">
+            <img id="Outline_img" src="./PCA_type2_3D.png">
+         </div>
+      </div>
+   </div>
+</body>
+</html>

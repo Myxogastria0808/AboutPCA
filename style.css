@@ -1,0 +1,112 @@
+body, html {
+    margin: 0;
+    top: 0;
+    left: 0;
+    padding: 0;
+    background-color: rgb(145, 145, 145);
+  }
+  h1 {
+      color: #30ff00;
+      text-shadow: 0 0 10px #000;
+      margin: 0;
+  }
+  @media screen and (min-width: 410px) {
+    .background-img {
+      font-size: 80px;
+    }
+  }
+  @media screen and (max-width: 411px) {
+    .background-img {
+      font-size: 60px;
+    }
+  }
+  .background-img {
+    background-image: url(./PCA.png);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(0, 255, 13);
+    text-shadow: 0 0 10px #000;
+  }
+  @media screen and (max-width: 400px) {
+    h1 {
+      font-size: 3rem;
+    }
+  }
+  @media screen and (min-width: 401px) {
+    h1 {
+      font-size: 4rem;
+    }
+  }
+  h2 {
+    text-align: center;
+    font-size: 40px;
+    color: rgb(0, 200, 255);
+    text-shadow: 0 0 10px #000;
+  }
+  h3 {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(43, 255, 0);
+    text-shadow: 0 0 10px #000;
+  }
+  h4 {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(0, 200, 255);
+    text-shadow: 0 0 10px #000;
+  }
+  p {
+    color: white;
+    font-size: 16px;
+  }
+  .p-section {
+    text-align: center;
+  }
+  .width {
+    max-width: 1525px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .width-content {
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 1024px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+.youtube {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+.youtube video {
+  width: 100%;
+}
+a {
+  color: rgb(255, 170, 0);
+  text-shadow: 0 0 10px #000;
+  font-size: 20px;
+}
+.a-div {
+  text-align: center;
+}
+pre {
+  background-color: white;
+  border-radius: 10px;
+}
+/*img*/
+#Outline_img {
+  width: 90vw;
+  max-width: 1024px;
+  text-align: center;
+  margin: 0;
+}
+.img_div {
+  display: block;
+  margin: auto;
+  text-align: center;
+}

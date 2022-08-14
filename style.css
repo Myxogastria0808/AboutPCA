@@ -21,7 +21,7 @@ body, html {
     }
   }
   .background-img {
-    background-image: url(./PCA.png);
+    background-image: url(./PCA.webp);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

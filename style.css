@@ -4,6 +4,7 @@ body, html {
     left: 0;
     padding: 0;
     background-color: rgb(145, 145, 145);
+    overflow-x: hidden;
   }
   h1 {
       color: #30ff00;

@@ -10,12 +10,12 @@ body, html {
       text-shadow: 0 0 10px #000;
       margin: 0;
   }
-  @media screen and (min-width: 410px) {
+  @media screen and (min-width: 500px) {
     .background-img {
       font-size: 80px;
     }
   }
-  @media screen and (max-width: 411px) {
+  @media screen and (max-width: 499px) {
     .background-img {
       font-size: 60px;
     }
@@ -95,8 +95,9 @@ a {
   text-align: center;
 }
 pre {
-  background-color: white;
+  background-color: rgb(240, 240, 240);
   border-radius: 10px;
+  overflow-x: scroll;
 }
 /*img*/
 #Outline_img {
